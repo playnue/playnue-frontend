@@ -108,7 +108,7 @@ export default function Bookings() {
           </div>
 
           <div className="min-h-[250vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
-            <div className="grid auto-rows-min gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+            <div style={{padding:"30px"}} className="grid auto-rows-min gap-20 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
               {data.map((item) => (
                 <div
                   key={item.id}
