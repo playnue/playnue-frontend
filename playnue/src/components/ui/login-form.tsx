@@ -3,14 +3,9 @@ import React, { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/context/UserContext";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -19,6 +14,7 @@ export function LoginForm() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { setUser } = useUser(); // Get setUser from context
 
   const handleLogin = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -29,9 +25,10 @@ export function LoginForm() {
         { email, password }
       );
 
-      // Save the user data to localStorage (e.g., token, user info)
+      // Save the user data to localStorage and update the context
       if (data?.success) {
         localStorage.setItem("user", JSON.stringify(data.user));
+        setUser(data.user); // Update the context state
         console.log("Login successful");
         router.push("/");
       } else {
@@ -62,9 +59,7 @@ export function LoginForm() {
               placeholder="m@example.com"
               required
               value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="grid gap-2">
@@ -79,21 +74,16 @@ export function LoginForm() {
               type="password"
               required
               value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? <span className="loader" /> : "Login"}
           </Button>
-          <Button variant="outline" className="w-full">
-            Login with Google
-          </Button>
         </form>
         <div className="mt-4 text-center text-sm">
           Don&apos;t have an account?{" "}
-          <Link href={"/component/SignUp"} className="underline">
+          <Link href="/component/SignUp" className="underline">
             Sign up
           </Link>
         </div>
