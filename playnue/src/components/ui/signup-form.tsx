@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; // Import the useRouter hook for navigation
 import { Button } from "@/components/ui/button";
+import axios from "axios";
 import {
   Card,
   CardContent,
@@ -15,9 +17,12 @@ import { Label } from "@/components/ui/label";
 
 export function SignUpForm() {
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false); // State for loading
+  const router = useRouter(); // Initialize the useRouter hook
 
   const handleSignUp = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -28,28 +33,24 @@ export function SignUpForm() {
       return;
     }
 
+    setLoading(true); // Start loading when sign-up is initiated
     try {
-      // Replace with your API endpoint
-      // const response = await fetch("/api/signup", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ email, name, password }),
-      // });
+      const { data } = await axios.post(
+        "https://ej-backend.onrender.com/api/v1/user/register",
+        { firstName, lastName, email, password }
+      );
 
-      // if (response.ok) {
-      //   const data = await response.json();
-      //   console.log("Sign-up successful:", data);
-      //   // Redirect or handle success
-      // } else {
-      //   console.error("Sign-up failed");
-      //   // Handle failure
-      // }
-
-      console.log({ email, name, password, confirmPassword });
+      if (data?.success) {
+        console.log("Registration successful");
+        // Redirect to the home page
+        router.push("/");
+      } else {
+        console.log("Registration failed");
+      }
     } catch (error) {
       console.error("An error occurred:", error);
+    } finally {
+      setLoading(false); // Stop loading after request completes
     }
   };
 
@@ -75,14 +76,25 @@ export function SignUpForm() {
             />
           </div>
           <div className="grid gap-1">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="firstName">First Name</Label>
             <Input
-              id="name"
+              id="firstName"
               type="text"
-              placeholder="John Doe"
+              placeholder="John"
               required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+          </div>
+          <div className="grid gap-1">
+            <Label htmlFor="lastName">Last Name</Label>
+            <Input
+              id="lastName"
+              type="text"
+              placeholder="Doe"
+              required
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             />
           </div>
           <div className="grid gap-1">
@@ -105,8 +117,34 @@ export function SignUpForm() {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
-          <Button type="submit" className="w-full">
-            Sign Up
+          <Button type="submit" className="w-full" disabled={loading}>
+            {loading ? (
+              <div className="flex items-center justify-center">
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                  ></path>
+                </svg>
+                <span className="ml-2">Signing Up...</span>
+              </div>
+            ) : (
+              "Sign Up"
+            )}
           </Button>
         </form>
         <div className="mt-4 text-center text-sm">

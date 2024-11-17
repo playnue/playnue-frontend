@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-
+import axios from "axios";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,10 +17,31 @@ import { Label } from "@/components/ui/label";
 export function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleLogin = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    console.log("Form Submitted:", { email, password });
+    setIsLoading(true);
+    try {
+      const { data } = await axios.post(
+        "https://ej-backend.onrender.com/api/v1/user/login",
+        { email, password }
+      );
+
+      // Save the user data to localStorage (e.g., token, user info)
+      if (data?.success) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        console.log("Login successful");
+        router.push("/");
+      } else {
+        console.log("Login failed");
+      }
+    } catch (error) {
+      console.error("Login failed", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -62,8 +84,8 @@ export function LoginForm() {
               }}
             />
           </div>
-          <Button type="submit" className="w-full">
-            Login
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? <span className="loader" /> : "Login"}
           </Button>
           <Button variant="outline" className="w-full">
             Login with Google
