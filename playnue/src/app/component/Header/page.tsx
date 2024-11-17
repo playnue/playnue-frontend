@@ -3,7 +3,9 @@ import React from "react";
 import Link from "next/link";
 import { FaUserCircle } from "react-icons/fa";
 import { useUser } from "@/context/UserContext";
-
+import logo from "/public/logo.png";
+import Image from "next/image";
+import { PackageX } from "lucide-react";
 const Navbar = () => {
   const { user, logout } = useUser(); // Get user and logout function from context
 
@@ -11,12 +13,12 @@ const Navbar = () => {
     <nav className="bg-black text-white px-4 py-3 flex justify-between items-center">
       {/* Logo and Tagline */}
       <div className="flex items-center space-x-2">
-        <img
-          src="/path-to-your-logo.png" // Replace with your logo image path
+        <Image
+          src={logo} // Replace with your logo image path
           alt="PlayNue Logo"
           className="h-8"
+          style={{height:"48px",width:"76px"}}
         />
-        <span className="text-lg font-semibold">PlayNue</span>
       </div>
 
       {/* Navigation Links */}
