@@ -32,6 +32,9 @@ const Navbar = () => {
         <Link href="#gallery" className="hover:text-gray-300">
           Gallery
         </Link>
+        <Link href="/component/User_Dashboard" className="hover:text-gray-300">
+        User Dashboard
+        </Link>
       </div>
 
       {/* User Info or Login/Signup Button */}
