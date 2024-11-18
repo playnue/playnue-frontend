@@ -74,41 +74,63 @@ export default function Bookings() {
     setIsSearching((prev) => !prev);
   };
 
+  const scrollToVenues = () => {
+    const venueSection = document.getElementById("venues-section");
+    if (venueSection) {
+      venueSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <SidebarProvider>
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2">
-          <div className="flex items-center gap-2 px-4"></div>
+        <header className="flex h-16 items-center px-4">
+          <h1 className="text-2xl font-bold text-black-600">
+            PlayNue - Now in Lucknow, Uttar Pradesh
+          </h1>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-          <div className="grid auto-rows-min gap-40 grid-cols-2 md:grid-cols-2 lg:grid-cols-2">
-            <div className="aspect-video rounded-xl bg-white/50 p-4 text-black text-center shadow-md">
-              <p>You searched for {location}</p>
-              {isSearching ? (
-                <div className="mt-2 flex items-center">
-                  <Input
-                    style={{ width: "250px" }}
-                    type="text"
-                    placeholder="Enter your location"
-                  />
-                  <button className="rounded-r-lg p-2 text-white">🔍</button>
-                </div>
-              ) : (
-                <button
-                  onClick={handleToggle}
-                  className="mt-4 rounded-lg bg-blue-500 px-4 py-2 text-white"
-                >
-                  Change Location
-                </button>
-              )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* First Box: Welcome Message */}
+            <div className="rounded-xl bg-green-600 p-6 text-white shadow-md">
+              <h2 className="text-2xl font-semibold">
+                Welcome to PlayNue in Lucknow!
+              </h2>
+              <p className="mt-4 text-sm">
+                We are excited to launch our platform in the vibrant city of
+                Lucknow. Explore top-rated sports venues and make your bookings
+                with ease. Enjoy a hassle-free experience at the best locations!
+              </p>
+              <button onClick={scrollToVenues} className="mt-4 bg-white text-green-600 py-2 px-4 rounded-lg shadow-md hover:bg-gray-100">
+                Explore Venues Below
+              </button>
             </div>
-            <div className="aspect-video rounded-xl bg-black/50">
-              <h1>Image</h1>
+
+            {/* Second Box: City Info & Map */}
+            <div className="rounded-xl overflow-hidden shadow-lg">
+              <img
+                src="https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSH-hY03lKzhlwt78INPqQrftsrQ_dnR6U5YAZx3N8U4xGT7RrLgidyXPIdqtgTD4l56k_u1AmPvwD9m6OUoc67lhz8N1CPnVwk3FdRWA"
+                alt="Lucknow City"
+                className="w-full h-64 object-fit"
+              />
+              <div className="p-4 bg-gray-800 text-white">
+                <h2 className="text-xl font-semibold">
+                  Discover Sports in Lucknow
+                </h2>
+                <p className="mt-2 text-sm">
+                  Find the best sports venues in Lucknow, from cricket turfs to
+                  badminton courts. We offer you a wide range of choices to
+                  match your enthusiasm and energy.
+                </p>
+              </div>
             </div>
           </div>
 
           <div className="min-h-[250vh] flex-1 rounded-xl bg-muted/50 md:min-h-min">
-            <div style={{padding:"30px"}} className="grid auto-rows-min gap-20 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+            <div
+              style={{ padding: "30px" }}
+              className="grid auto-rows-min gap-20 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+            >
               {data.map((item) => (
                 <div
                   key={item.id}

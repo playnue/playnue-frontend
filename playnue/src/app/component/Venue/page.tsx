@@ -23,6 +23,8 @@ interface VenueDetails {
   reviews: number;
   price: number;
   addGuestPrice: number;
+  latitude: number; // Add latitude
+  longitude: number; // Add longitude
 }
 
 const BadmintonBooking = () => {
@@ -39,6 +41,8 @@ const BadmintonBooking = () => {
     reviews: 15,
     price: 150,
     addGuestPrice: 5,
+    latitude: 30.264417 , // Add latitude
+    longitude: 78.080472, // Add longitude
   };
 
   const reviews = [
@@ -98,7 +102,6 @@ const BadmintonBooking = () => {
   return (
     <div className="max-w-7xl mx-auto p-4">
       {/* Navigation */}
-      
 
       {/* Image Gallery */}
       <div className="relative mb-8">
@@ -159,6 +162,49 @@ const BadmintonBooking = () => {
             <div className="flex items-center gap-2">
               <Mail className="w-4 h-4" />
               {venue.email}
+            </div>
+          </div>
+
+          {/* Sports Icon Section */}
+          <div className="mt-6">
+            <h2 className="text-xl font-semibold mb-4">Available Sports:</h2>
+            <div className="grid grid-cols-4 gap-6">
+              {/* Badminton Icon */}
+              <div className="flex flex-col items-center text-sm">
+                <img
+                  src="https://img.icons8.com/color/48/000000/badminton.png"
+                  alt="Badminton"
+                  className="w-12 h-12"
+                />
+                <span>Badminton</span>
+              </div>
+              {/* Tennis Icon */}
+              <div className="flex flex-col items-center text-sm">
+                <img
+                  src="https://img.icons8.com/color/48/000000/tennis.png"
+                  alt="Tennis"
+                  className="w-12 h-12"
+                />
+                <span>Tennis</span>
+              </div>
+              {/* Football Icon */}
+              <div className="flex flex-col items-center text-sm">
+                <img
+                  src="https://img.icons8.com/color/48/000000/football2.png"
+                  alt="Football"
+                  className="w-12 h-12"
+                />
+                <span>Football</span>
+              </div>
+              {/* Basketball Icon */}
+              <div className="flex flex-col items-center text-sm">
+                <img
+                  src="https://img.icons8.com/color/48/000000/basketball.png"
+                  alt="Basketball"
+                  className="w-12 h-12"
+                />
+                <span>Basketball</span>
+              </div>
             </div>
           </div>
         </div>
@@ -332,10 +378,10 @@ const BadmintonBooking = () => {
             <h2 className="text-xl font-semibold mb-4">Location</h2>
             <div className="border rounded-lg overflow-hidden shadow-sm">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.6553326835033!2d-74.00601518429446!3d40.71277527933047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDAlNDInNDYuMCJOIDc0wrAwMCcwMC4wIlc!5e0!3m2!1sen!2sus!4v1679475414533!5m2!1sen!2sus"
+                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDfpdR57AhvUccjGREgfhGaljfwohSOGt4&q=${venue.latitude},${venue.longitude}`}
                 width="100%"
                 height="300"
-                allowFullScreen={false}
+                allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 className="border-none"
@@ -373,85 +419,11 @@ const BadmintonBooking = () => {
                   </div>
                 </div>
               </div>
-            <Link href={"/component/BookNow"}>
-              <button className="w-full bg-gray-900 text-white py-3 rounded-lg mb-6">
-                Book Now
-              </button>
-            </Link>
-
-              <form className="space-y-4">
-                <div>
-                  <label className="block mb-1">Name</label>
-                  <input
-                    type="text"
-                    placeholder="Enter Name"
-                    className="w-full p-2 border rounded-lg"
-                  />
-                </div>
-
-                <div>
-                  <label className="block mb-1">Email</label>
-                  <input
-                    type="email"
-                    placeholder="Enter Email Address"
-                    className="w-full p-2 border rounded-lg"
-                  />
-                </div>
-
-                <div>
-                  <label className="block mb-1">Phone Number</label>
-                  <input
-                    type="tel"
-                    placeholder="Enter Phone Number"
-                    className="w-full p-2 border rounded-lg"
-                  />
-                </div>
-
-                <div>
-                  <label className="block mb-1">Date</label>
-                  <input type="date" className="w-full p-2 border rounded-lg" />
-                </div>
-
-                <div>
-                  <label className="block mb-1">Details</label>
-                  <textarea
-                    placeholder="Enter Comments"
-                    className="w-full p-2 border rounded-lg"
-                    rows={3}
-                  />
-                </div>
-
-                <div>
-                  <label className="block mb-2">Number of Guests</label>
-                  <div className="flex gap-2">
-                    {[1, 2, 3, 4].map((num) => (
-                      <button
-                        key={num}
-                        className={`flex-1 py-2 rounded-lg ${
-                          guestCount === num
-                            ? "bg-green-600 text-white"
-                            : "bg-gray-100"
-                        }`}
-                        onClick={() => setGuestCount(num)}
-                      >
-                        {num}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <label className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4" />
-                  <span className="text-sm text-gray-600">
-                    By clicking 'Send Request', I agree to Dreamsport Privacy
-                    Policy and Terms of Use
-                  </span>
-                </label>
-
-                <button className="w-full bg-gray-900 text-white py-3 rounded-lg">
-                  Send Request
+              <Link href={"/component/BookNow"}>
+                <button className="w-full bg-gray-900 text-white py-3 rounded-lg mb-6">
+                  Book Now
                 </button>
-              </form>
+              </Link>
             </div>
           </div>
         </div>
