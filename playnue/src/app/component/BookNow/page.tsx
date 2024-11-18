@@ -64,15 +64,10 @@ useEffect(() => {
           <div className="col-span-2">
             <div className="mb-6">
               <h1 className="text-2xl font-semibold text-gray-800">
-                Impetus - Bangalore Football Stadium
+              John Doe Turf
               </h1>
-              <p className="text-gray-600">Ashok Nagar</p>
+              <p className="text-gray-600">70 Bright Street,Lucknow </p>
             </div>
-
-            <div className="bg-green-500 text-white p-4 mb-6 rounded-md text-center">
-              Earn 3 karma points on every booking!
-            </div>
-
             <div className="space-y-6">
               <div>
                 <label className="block text-gray-700 mb-2">Sports</label>
@@ -180,17 +175,17 @@ useEffect(() => {
                     <SelectValue placeholder="--Select Court--" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="disabled" disabled>
-                      No Courts Available For The Selected Time
-                    </SelectItem>
-                  </SelectContent>
+                  <SelectItem value="disabled" disabled>
+                    No Courts Available For The Selected Time
+                  </SelectItem>
+                  <SelectItem value="5a-side">
+                    5a Side
+                  </SelectItem>
+                </SelectContent>
                 </Select>
               </div>
 
-              <button
-                className="w-full py-3 bg-gray-100 text-gray-500 rounded-md"
-                disabled
-              >
+              <button className="w-full py-3 bg-green text-gray-500 rounded-md" >
                 Add To Cart
               </button>
             </div>

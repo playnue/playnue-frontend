@@ -120,7 +120,7 @@ const VenuePage = () => {
 
       {/* Image Gallery */}
       <div className="relative mb-8">
-        <div className="aspect-video relative overflow-hidden rounded-lg">
+        <div className="relative h-60 overflow-hidden rounded-lg">
           <img
             src={venue.images[currentImage]}
             alt={`Venue image ${currentImage + 1}`}
@@ -156,22 +156,6 @@ const VenuePage = () => {
             <h2 className="text-lg font-semibold mb-2">Timing</h2>
             <p>6:30 AM - 11:30 PM</p>
           </Card>
-
-          {/* Location */}
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">Location</h2>
-            <div className="border rounded-lg overflow-hidden shadow-sm">
-              <iframe
-                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDfpdR57AhvUccjGREgfhGaljfwohSOGt4&q=${venue.latitude},${venue.longitude}`}
-                width="100%"
-                height="300"
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="border-none"
-              ></iframe>
-            </div>
-          </div>
           {/* Sports Available */}
           <Card className="p-4 mb-4">
             <h2 className="text-lg font-semibold mb-2">
@@ -236,6 +220,21 @@ const VenuePage = () => {
               Bengaluru
             </p>
           </Card>
+                    {/* Location */}
+                    <div className="mt-8">
+            <h2 className="text-xl font-semibold mb-4">Location</h2>
+            <div className="border rounded-lg overflow-hidden shadow-sm">
+              <iframe
+                src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyDfpdR57AhvUccjGREgfhGaljfwohSOGt4&q=${venue.latitude},${venue.longitude}`}
+                width="100%"
+                height="300"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="border-none"
+              ></iframe>
+            </div>
+          </div>
         </div>
       </div>
     </div>

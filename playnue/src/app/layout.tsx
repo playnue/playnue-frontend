@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Changa_One } from "next/font/google"; // Import Changa One font
 import "./globals.css";
 import Navbar from "./component/Header/page";
 import { UserProvider } from "@/context/UserContext";
 import Footer from "./component/Footer/page";
-const inter = Inter({ subsets: ["latin"] });
+
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,8 +19,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-      <UserProvider><Navbar/>{children}<Footer/></UserProvider>
+      <body > {/* Apply the Changa One font */}
+        <UserProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </UserProvider>
       </body>
     </html>
   );
