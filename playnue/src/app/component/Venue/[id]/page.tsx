@@ -46,6 +46,7 @@ const venueData: VenueDetails[] = [
     reviews: 120,
     images: [
       "https://5.imimg.com/data5/SELLER/Default/2022/12/GT/XH/CW/2451824/cricket-turf.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOfEKiZgLi3sQ_Yc_vWq6AHQYJ7RVOQgwOhw&s",
     ],
     phone: "+91 9876543210",
     email: "johndoe@example.com",
@@ -65,6 +66,7 @@ const venueData: VenueDetails[] = [
     reviews: 95,
     images: [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOfEKiZgLi3sQ_Yc_vWq6AHQYJ7RVOQgwOhw&s",
+      "https://5.imimg.com/data5/SELLER/Default/2022/12/GT/XH/CW/2451824/cricket-turf.jpg",
     ],
     phone: "+91 9876543211",
     email: "janesmith@example.com",
@@ -110,7 +112,7 @@ const VenuePage = () => {
           </div>
         </div>
         <div className="flex gap-2">
-          <Link href={"/component/BookNow"}>
+          <Link href={`/component/BookNow/${venue.id}`}>
             <button className="px-6 py-2 bg-green-500 text-white rounded-lg">
               Book Now
             </button>
