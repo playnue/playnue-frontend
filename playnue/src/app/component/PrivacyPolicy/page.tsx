@@ -117,7 +117,7 @@ const PrivacyPolicy = () => {
           <p className="mb-4">
             Our website may contain links to other websites that are not owned
             or controlled by us. Please be aware that we are not responsible
-            for such other websites or third parties' privacy practices. We
+            for such other websites or third parties privacy practices. We
             encourage you to be aware when you leave our website and read the
             privacy statements of each website that may collect personal
             information.
